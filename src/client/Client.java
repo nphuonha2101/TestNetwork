@@ -65,10 +65,10 @@ public class Client {
                                     byte[] data = new byte[102400];
                                     int byteRead;
 
+                                    registerImpl.writeImgFileSize(sessionID, currentFilePointer, fileSize);
                                     while ((byteRead = bis.read(data)) != -1) {
                                         byte[] fitData = new byte[byteRead];
 
-                                        registerImpl.seek(sessionID, currentFilePointer);
                                         registerImpl.uploadImage(sessionID, fitData);
                                     }
 
@@ -115,7 +115,7 @@ public class Client {
                         candidateID = Integer.parseInt(param1);
                         if (candidateID != -1) {
 
-                            if (registerImpl.updateCandidateAddress(sessionID, candidateID, userPrompt))
+                            if (registerImpl.updateCandidateAddress(sessionID, candidateID, param2))
                                 System.out.println("Update successful!");
                             else
                                 System.out.println("Update failed!");
